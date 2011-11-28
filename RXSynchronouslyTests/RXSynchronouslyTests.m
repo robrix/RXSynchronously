@@ -25,6 +25,9 @@
 
 
 -(void)testTimesOutAfterASpecifiedWait {
+	// this test has a race condition:
+	// completedActions is not being serialized, and theoretically RXSynchronouslyWithTimeout could take the full second that the async block sleeps to complete
+	// unlikely, but worth noting
 	NSMutableArray *completedActions = [NSMutableArray new];
 	RXSynchronouslyWithTimeout(DISPATCH_TIME_NOW, ^(RXSynchronousCompletionBlock didComplete) {
 		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
