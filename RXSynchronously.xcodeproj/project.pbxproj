@@ -14,6 +14,7 @@
 		D4FCDC8114830AD300EB9EF7 /* libRXSynchronously.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D4FCDC6714830AD200EB9EF7 /* libRXSynchronously.a */; };
 		D4FCDC8714830AD300EB9EF7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = D4FCDC8514830AD300EB9EF7 /* InfoPlist.strings */; };
 		D4FCDC8A14830AD300EB9EF7 /* RXSynchronouslyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = D4FCDC8914830AD300EB9EF7 /* RXSynchronouslyTests.m */; };
+		D4FCDC9514830BBC00EB9EF7 /* RXAssertions.m in Sources */ = {isa = PBXBuildFile; fileRef = D4FCDC9414830BBC00EB9EF7 /* RXAssertions.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,15 +33,16 @@
 		D4FCDC6D14830AD200EB9EF7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		D4FCDC6E14830AD200EB9EF7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		D4FCDC6F14830AD200EB9EF7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		D4FCDC7214830AD200EB9EF7 /* RXSynchronously-Prefix.pch */ = {isa = PBXFileReference; path = "RXSynchronously-Prefix.pch"; sourceTree = "<group>"; };
-		D4FCDC7314830AD300EB9EF7 /* RXSynchronously.h */ = {isa = PBXFileReference; path = RXSynchronously.h; sourceTree = "<group>"; };
+		D4FCDC7214830AD200EB9EF7 /* RXSynchronously-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "RXSynchronously-Prefix.pch"; sourceTree = "<group>"; };
+		D4FCDC7314830AD300EB9EF7 /* RXSynchronously.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RXSynchronously.h; sourceTree = "<group>"; };
 		D4FCDC7414830AD300EB9EF7 /* RXSynchronously.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RXSynchronously.m; sourceTree = "<group>"; };
 		D4FCDC7B14830AD300EB9EF7 /* RXSynchronouslyTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RXSynchronouslyTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D4FCDC7C14830AD300EB9EF7 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
-		D4FCDC8414830AD300EB9EF7 /* RXSynchronouslyTests-Info.plist */ = {isa = PBXFileReference; path = "RXSynchronouslyTests-Info.plist"; sourceTree = "<group>"; };
+		D4FCDC8414830AD300EB9EF7 /* RXSynchronouslyTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "RXSynchronouslyTests-Info.plist"; sourceTree = "<group>"; };
 		D4FCDC8614830AD300EB9EF7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		D4FCDC8814830AD300EB9EF7 /* RXSynchronouslyTests.h */ = {isa = PBXFileReference; path = RXSynchronouslyTests.h; sourceTree = "<group>"; };
 		D4FCDC8914830AD300EB9EF7 /* RXSynchronouslyTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RXSynchronouslyTests.m; sourceTree = "<group>"; };
+		D4FCDC9314830BBC00EB9EF7 /* RXAssertions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RXAssertions.h; sourceTree = "<group>"; };
+		D4FCDC9414830BBC00EB9EF7 /* RXAssertions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RXAssertions.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,7 +127,8 @@
 		D4FCDC8214830AD300EB9EF7 /* RXSynchronouslyTests */ = {
 			isa = PBXGroup;
 			children = (
-				D4FCDC8814830AD300EB9EF7 /* RXSynchronouslyTests.h */,
+				D4FCDC9314830BBC00EB9EF7 /* RXAssertions.h */,
+				D4FCDC9414830BBC00EB9EF7 /* RXAssertions.m */,
 				D4FCDC8914830AD300EB9EF7 /* RXSynchronouslyTests.m */,
 				D4FCDC8314830AD300EB9EF7 /* Supporting Files */,
 			);
@@ -258,6 +261,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D4FCDC8A14830AD300EB9EF7 /* RXSynchronouslyTests.m in Sources */,
+				D4FCDC9514830BBC00EB9EF7 /* RXAssertions.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,7 +308,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
@@ -325,7 +329,7 @@
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.7;
+				MACOSX_DEPLOYMENT_TARGET = 10.6;
 				SDKROOT = macosx;
 			};
 			name = Release;

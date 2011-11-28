@@ -1,32 +1,41 @@
-//
 //  RXSynchronouslyTests.m
-//  RXSynchronouslyTests
-//
 //  Created by Rob Rix on 11-11-27.
 //  Copyright (c) 2011 Monochrome Industries. All rights reserved.
-//
 
-#import "RXSynchronouslyTests.h"
+#import "RXAssertions.h"
+#import "RXSynchronously.h"
+
+@interface RXSynchronouslyTests : SenTestCase
+@end
 
 @implementation RXSynchronouslyTests
 
-- (void)setUp
-{
-    [super setUp];
-    
-    // Set-up code here.
+-(void)testSynchronizesOnTheCompletionOfAsynchronousWork {
+	NSMutableArray *completedActions = [NSMutableArray new];
+	RXSynchronously(^(RXSynchronousCompletionBlock didComplete) {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+			[completedActions addObject:@"async"];
+			didComplete();
+		});
+	});
+	[completedActions addObject:@"sync"];
+	
+	RXAssertEquals(completedActions, ([NSArray arrayWithObjects:@"async", @"sync", nil]));
 }
 
-- (void)tearDown
-{
-    // Tear-down code here.
-    
-    [super tearDown];
-}
 
-- (void)testExample
-{
-    STFail(@"Unit tests are not implemented yet in RXSynchronouslyTests");
+-(void)testTimesOutAfterASpecifiedWait {
+	NSMutableArray *completedActions = [NSMutableArray new];
+	RXSynchronouslyWithTimeout(DISPATCH_TIME_NOW, ^(RXSynchronousCompletionBlock didComplete) {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+			sleep(1);
+			[completedActions addObject:@"async"];
+			didComplete();
+		});
+	});
+	[completedActions addObject:@"sync"];
+	
+	RXAssertEquals(completedActions, [NSArray arrayWithObject:@"sync"]);
 }
 
 @end
