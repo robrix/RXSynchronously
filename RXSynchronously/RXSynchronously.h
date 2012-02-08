@@ -27,3 +27,13 @@ Its impatient sibling, RXSynchronouslyWithTimeout, lets you time out on the wait
 
 void RXSynchronously(RXSynchronousBlock block); // never times out
 void RXSynchronouslyWithTimeout(dispatch_time_t timeout, RXSynchronousBlock block);
+
+
+/*
+RXSpinSynchronously works like RXSynchronously, but spins the run loop instead of waiting on a semaphore. This means that work scheduled on the run loop can complete while this spins, meaning that things like URL connections on the same thread can complete.
+
+RXSpinSynchronouslyWithTimeout takes an NSDate instead of a dispatch_time_t because libdispatch doesn’t appear to give us a way to get a concrete, absolute time given its abstract representation.
+*/
+
+void RXSpinSynchronously(RXSynchronousBlock block); // never times out
+void RXSpinSynchronouslyWithTimeout(NSDate *endDate, RXSynchronousBlock block);

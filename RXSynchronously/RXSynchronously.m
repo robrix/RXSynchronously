@@ -18,3 +18,20 @@ void RXSynchronouslyWithTimeout(dispatch_time_t timeout, RXSynchronousBlock bloc
 	dispatch_semaphore_wait(semaphore, timeout);
 	dispatch_release(semaphore);
 }
+
+
+void RXSpinSynchronously(RXSynchronousBlock block) {
+	RXSpinSynchronouslyWithTimeout([NSDate distantFuture], block);
+}
+
+void RXSpinSynchronouslyWithTimeout(NSDate *endDate, RXSynchronousBlock block) {
+	__block BOOL done = NO;
+	
+	block(^{
+		done = YES;
+	});
+	
+	while(!done && ([[NSDate date] laterDate:endDate] == endDate)) {
+		[[NSRunLoop currentRunLoop] runUntilDate:[NSDate date]];
+	}
+}

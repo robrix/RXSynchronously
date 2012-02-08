@@ -39,6 +39,43 @@
 	[completedActions addObject:@"sync"];
 	
 	RXAssertEquals(completedActions, [NSArray arrayWithObject:@"sync"]);
+	
+	sleep(1);
+	RXAssertEquals(completedActions, ([NSArray arrayWithObjects:@"sync", @"async", nil]));
+}
+
+
+-(void)testSpinsTheRunLoopUntilTheCompletionOfAsynchronousWork {
+	NSMutableArray *completedActions = [NSMutableArray new];
+	RXSpinSynchronously(^(RXSynchronousCompletionBlock didComplete) {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+			[completedActions addObject:@"async"];
+			didComplete();
+		});
+	});
+	[completedActions addObject:@"sync"];
+	
+	RXAssertEquals(completedActions, ([NSArray arrayWithObjects:@"async", @"sync", nil]));
+}
+
+-(void)testTimesOutSpinningAfterASpecifiedWait {
+	// this test has a race condition:
+	// completedActions is not being serialized, and theoretically RXSpinSynchronouslyWithTimeout could take the full second that the async block sleeps to complete
+	// unlikely, but worth noting
+	NSMutableArray *completedActions = [NSMutableArray new];
+	RXSpinSynchronouslyWithTimeout([NSDate date], ^(RXSynchronousCompletionBlock didComplete) {
+		dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+			sleep(1);
+			[completedActions addObject:@"async"];
+			didComplete();
+		});
+	});
+	[completedActions addObject:@"sync"];
+	
+	RXAssertEquals(completedActions, [NSArray arrayWithObject:@"sync"]);
+	
+	sleep(1);
+	RXAssertEquals(completedActions, ([NSArray arrayWithObjects:@"sync", @"async", nil]));
 }
 
 @end
